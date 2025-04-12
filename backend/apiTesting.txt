@@ -1,0 +1,28 @@
+credentails
+
+    hari@gmail.com  --patient
+    hari123 
+
+    
+
+
+
+
+1. http://localhost:5000          ==get
+
+
+2. http://localhost:5000/api/v1/auth/register      ==post
+
+{
+    "email":"sathish@gmail.com",
+    "password":"star123",
+    "name":"sathish",
+    "role":"patient",
+    "gender":"male"
+}
+
+3. http://localhost:5000/api/auth/login     ==post
+
+
+
+python symptoms.py arg1 arg2 '{"data": ["itching", "skin_rash", "nodal_skin_eruptions"]}'
