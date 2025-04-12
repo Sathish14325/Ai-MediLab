@@ -74,6 +74,7 @@ The project is structured into two main directories:
 ```text
    MONGO_URI=your_mongodb_uri
    PORT=5000
+   JWT_KEY=your_jwt-serect_key
 ```
 
 5. **Run the backend server**
@@ -97,9 +98,6 @@ The project is structured into two main directories:
 
 ## Contributors
 
-- **[Abdul Wahab](https://github.com/abdul-wahab619)** - Full Stack Developer
-- **[Nafeesa Shehzadi](https://github.com/nafeesa-shehzadi)** - Frontend Developer
-
 ## Collaboration
 
 We welcome contributions from everyone! If you are interested in contributing to this project, please follow these steps:
@@ -115,7 +113,6 @@ For major changes, please open an issue first to discuss what you would like to 
 
 Feel free to reach out to us with any questions or suggestions. Let's collaborate to extend the exposure and impact of this project!
 
-
 ## License
 
-This project is licensed under the [MIT License](https://github.com/abdul-wahab619/AI-MedLab/blob/main/LICENSE).
+This project is licensed under the [MIT License](https://github.com/Sathish14325/Ai-MediLab.git).
