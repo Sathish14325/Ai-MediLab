@@ -10,10 +10,11 @@ import Profile from "./Profile.jsx";
 import Appointments from "./Appointments.jsx";
 
 const Dashboard = () => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const { data, loading, error } = useGetProfile(
     `${BASE_URL}/doctors/profile/me`
   );
-  console.log("data: ", data);
+  console.log("data from hook: ", data);
   const [tab, setTab] = useState("overview");
 
   return (

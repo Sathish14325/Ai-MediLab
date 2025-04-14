@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { BASE_URL, token } from "../config";
 
 const DeleteDoctor = () => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const navigate = useNavigate();
   const { id } = useParams();
 

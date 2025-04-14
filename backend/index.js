@@ -1,6 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRoute from "./Routes/auth.js";
@@ -13,6 +14,7 @@ import adminRoute from "./Routes/admin.js";
 import contactRoute from "./Routes/contact.js";
 import forgotPassRoute from "./Routes/forgot-password.js";
 import healthRoute from "./Routes/healthPredict.js";
+import symptomPredictRoute from "./Routes/symptomsPredict.js";
 
 dotenv.config();
 //console.log(dotenv.config());
@@ -45,6 +47,7 @@ const connectDB = async () => {
 //middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use("/api/v1/auth", authRoute); //domain/api/v1/auth/register or any other request
 app.use("/api/v1/users", userRoute);
@@ -55,7 +58,8 @@ app.use("/api/v1/", diseaseRoute);
 app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/", contactRoute);
 app.use("/api/v1/", forgotPassRoute);
-app.use("/api/v1/", healthRoute);
+//app.use("/api/v1/", healthRoute);
+app.use("/api/v1/", symptomPredictRoute);
 
 app.listen(port, () => {
   connectDB();

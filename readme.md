@@ -91,6 +91,15 @@ The project is structured into two main directories:
    npm start
 ```
 
+7. **Run ai service**
+
+```bash
+   cd ai-service
+   python -m venv venv
+   venv\Scripts\activate
+   pip install flask pandas numpy scikit-learn
+   python app.py
+
 ## Usage
 
 - Access the application at `http://localhost:5173`.
@@ -116,3 +125,4 @@ Feel free to reach out to us with any questions or suggestions. Let's collaborat
 ## License
 
 This project is licensed under the [MIT License](https://github.com/Sathish14325/Ai-MediLab.git).
+```

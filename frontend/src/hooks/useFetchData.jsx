@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
-import { token } from "../config.js";
+// import { token } from "../config.js";
 
 const useFetchData = (url) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const token = localStorage.getItem("token");
+  //console.log("Token in useFetchData:", token);
+
   useEffect(() => {
     const fetchData = async () => {
+      if (!token) {
+        setError("No token found");
+        return;
+      }
+
       setLoading(true);
       try {
         const res = await fetch(url, {
@@ -16,17 +24,20 @@ const useFetchData = (url) => {
         const result = await res.json();
 
         if (!res.ok) {
-          throw new Error(result.message + "🤢");
+          throw new Error(result.message || "Something went wrong 🤢");
         }
-        setData(result.data);
-        setLoading(false);
+
+        setData(result.data || result);
       } catch (err) {
-        setLoading(false);
         setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchData();
-  }, [url]);
+  }, [url, token]);
+
   return { data, loading, error };
 };
 

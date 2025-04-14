@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
 
 const Signup = () => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const [loading, setLoading] = useState(false);

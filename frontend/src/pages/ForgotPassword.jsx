@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { authContext } from "../context/AuthContext.jsx";
 
 const ForgotPassword = () => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { dispatch } = useContext(authContext);

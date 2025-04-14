@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 function DoctorsDropDown({ testName, testResult = null }) {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const loginUser = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token"); // Assuming you store your token in localStorage
   const [selectedDoctor, setSelectedDoctor] = useState("");

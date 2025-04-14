@@ -12,6 +12,7 @@ import Error from "../../components/Error/Error";
 import { useParams } from "react-router-dom";
 
 const DoctorDetails = () => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const [tab, setTab] = useState("about");
   const { id } = useParams();
   const {

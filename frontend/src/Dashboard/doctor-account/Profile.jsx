@@ -5,6 +5,7 @@ import { BASE_URL, token } from "../../config.js";
 import { toast } from "react-toastify";
 
 const Profile = ({ doctorData }) => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const [formData, setFormData] = useState({
     name: "",
     email: "",

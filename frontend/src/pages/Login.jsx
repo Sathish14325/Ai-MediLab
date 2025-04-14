@@ -6,6 +6,7 @@ import HashLoader from "react-spinners/HashLoader";
 import { authContext } from "../context/AuthContext.jsx";
 
 const Login = () => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { dispatch } = useContext(authContext);

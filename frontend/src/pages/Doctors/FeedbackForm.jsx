@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
 
 const FeedbackForm = () => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [reviewText, setReviewText] = useState("");

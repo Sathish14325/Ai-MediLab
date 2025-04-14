@@ -3,6 +3,7 @@ import { BASE_URL } from "../config";
 import { toast } from "react-toastify";
 
 const Contact = () => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const [formData, setFormData] = useState({
     email: "",
     subject: "",

@@ -11,6 +11,7 @@ import Loading from "../components/Loader/Loading.jsx";
 import Error from "../components/Error/Error.jsx";
 
 const AdminBookings = () => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const [users, setUsers] = useState({});
   const [doctors, setDoctors] = useState({});
 

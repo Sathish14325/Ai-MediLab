@@ -5,6 +5,7 @@ import { BASE_URL, token } from "./../../config.js";
 import { toast } from "react-toastify";
 
 const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const bookingHandler = async () => {
     console.log("call");
     try {

@@ -6,6 +6,7 @@ import { BASE_URL, token } from "../../config.js";
 import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
 const Profile = ({ user }) => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
 

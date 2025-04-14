@@ -7,6 +7,7 @@ import Loader from "../../components/Loader/Loading";
 import Error from "../Error/Error";
 
 const DoctorList = () => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const { data: doctors, loading, error } = useFetchData(`${BASE_URL}/doctors`);
   return (
     <>

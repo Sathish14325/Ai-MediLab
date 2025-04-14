@@ -11,6 +11,7 @@ import Loading from "../../components/Loader/Loading.jsx";
 import Error from "../../components/Error/Error.jsx";
 
 const MyAccount = () => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const { dispatch } = useContext(authContext);
   const [tab, setTab] = useState("bookings");
 

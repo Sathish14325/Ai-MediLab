@@ -12,8 +12,6 @@ const pythonScriptPathForSymptoms = path.join(__dirname, "../symptoms.py");
 const symptomsModel = path.join(__dirname, "../aimodels/svc.pkl");
 
 router.post("/symptoms", (req, res) => {
-  let responseSent = false; // Flag to track if response has been sent
-
   try {
     const rawData = req.body.data;
     const symptomsArray =
@@ -25,58 +23,105 @@ router.post("/symptoms", (req, res) => {
       pythonScriptPathForSymptoms,
       "--loads",
       symptomsModel,
-      JSON.stringify({ data: symptomsArray }),
     ]);
 
-    let outputBuffer = "";
+    // Send input via stdin
+    pythonProcess.stdin.write(JSON.stringify({ data: symptomsArray }));
+    pythonProcess.stdin.end();
 
+    let outputBuffer = "";
     pythonProcess.stdout.on("data", (data) => {
       outputBuffer += data.toString();
     });
 
     pythonProcess.on("close", (code) => {
       try {
-        const prediction = JSON.parse(outputBuffer);
-        res.json({ data: prediction });
+        const result = JSON.parse(outputBuffer.trim());
+        res.json({ data: result });
       } catch (err) {
-        console.error("Error parsing Python output:", err);
-        res.status(500).send("Error parsing Python output");
+        console.error("Python output:", outputBuffer);
+        res.status(500).json({
+          error: "Failed to parse Python output",
+          rawOutput: outputBuffer,
+        });
       }
     });
 
-    {
-      // let prediction;
-      // pythonProcess.stdout.on("data", (data) => {
-      //   const dataString = data.toString();
-      //   console.log("Python script output===========:", JSON.parse(dataString));
-      //   prediction = JSON.parse(dataString);
-      // });
-      // pythonProcess.stderr.on("data", (data) => {
-      //   console.error("Python script error:", data.toString());
-      // });
-      // pythonProcess.on("close", (code) => {
-      //   console.log("Python process closed with code:", code);
-      //   console.log("Prediction:", prediction);
-      //   if (!responseSent) {
-      //     res.json({ data: prediction });
-      //     responseSent = true;
-      //   }
-      // });
-      // pythonProcess.on("error", (error) => {
-      //   console.error("Python process error:", error);
-      //   if (!responseSent) {
-      //     res.status(500).send("Internal Server Error");
-      //     responseSent = true;
-      //   }
-      // });
-    }
+    pythonProcess.stderr.on("data", (data) => {
+      console.error("Python error:", data.toString());
+    });
   } catch (error) {
-    console.error("Error:", error);
-    if (!responseSent) {
-      responseSent = true;
-      return res.status(500).send("Internal Server Error");
-    }
+    console.error("Server error:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
+
+// router.post("/symptoms", (req, res) => {
+//   let responseSent = false; // Flag to track if response has been sent
+
+//   try {
+//     const rawData = req.body.data;
+//     const symptomsArray =
+//       typeof rawData === "string"
+//         ? rawData.split(",").map((s) => s.trim())
+//         : rawData;
+
+//     const pythonProcess = spawn("python", [
+//       pythonScriptPathForSymptoms,
+//       "--loads",
+//       symptomsModel,
+//       JSON.stringify({ data: symptomsArray }),
+//     ]);
+
+//     let outputBuffer = "";
+
+//     pythonProcess.stdout.on("data", (data) => {
+//       outputBuffer += data.toString();
+//     });
+
+//     pythonProcess.on("close", (code) => {
+//       try {
+//         const prediction = JSON.parse(outputBuffer);
+//         res.json({ data: prediction });
+//       } catch (err) {
+//         console.error("Error parsing Python output:", err);
+//         res.status(500).send("Error parsing Python output");
+//       }
+//     });
+
+//     {
+//       // let prediction;
+//       // pythonProcess.stdout.on("data", (data) => {
+//       //   const dataString = data.toString();
+//       //   console.log("Python script output===========:", JSON.parse(dataString));
+//       //   prediction = JSON.parse(dataString);
+//       // });
+//       // pythonProcess.stderr.on("data", (data) => {
+//       //   console.error("Python script error:", data.toString());
+//       // });
+//       // pythonProcess.on("close", (code) => {
+//       //   console.log("Python process closed with code:", code);
+//       //   console.log("Prediction:", prediction);
+//       //   if (!responseSent) {
+//       //     res.json({ data: prediction });
+//       //     responseSent = true;
+//       //   }
+//       // });
+//       // pythonProcess.on("error", (error) => {
+//       //   console.error("Python process error:", error);
+//       //   if (!responseSent) {
+//       //     res.status(500).send("Internal Server Error");
+//       //     responseSent = true;
+//       //   }
+//       // });
+//     }
+//   } catch (error) {
+//     console.error("Error:", error);
+//     if (!responseSent) {
+//       responseSent = true;
+//       return res.status(500).send("Internal Server Error");
+//     }
+//   }
+// });
 
 export default router;

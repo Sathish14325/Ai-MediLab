@@ -13,6 +13,7 @@ import Loading from "../components/Loader/Loading.jsx";
 import Error from "../components/Error/Error.jsx";
 
 const AdminUsers = () => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const {
     data: users,
     loading,

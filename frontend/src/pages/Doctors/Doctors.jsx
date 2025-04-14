@@ -9,6 +9,7 @@ import Loader from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
 
 const Doctors = () => {
+  const BASE_URL = "http://localhost:5000/api/v1";
   const [query, setQuery] = useState("");
   const [debounceQuery, setDebounceQuery] = useState("");
 
